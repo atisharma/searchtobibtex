@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# bibtool key format string
+BIBKEYFMT='%3n(author):%+4d(year)'
+# All the things that you don't want in your bibtex entry, separated by \|
+BIBENTRYFILTER='= ,\|\"-\"\|url'
+
+# tempfile to store original bibtex file
+TEMPFILE=/tmp/$RANDOM
+
+mv $1 "$TEMPFILE"
+
+cat "$TEMPFILE" | grep -v "$BIBENTRYFILTER" | bibclean -delete-empty-values | bibtool -F -f "$BIBKEYFMT" > $1 ;
+
