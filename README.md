@@ -1,10 +1,10 @@
 searchtobibtex
 ==============
 
-# doitobibtex
+### doitobibtex
 Pulls bibtex data from doi URL via crossref API.
 
-# searchtobibtex
+### searchtobibtex
 performs crossref search and uses DOI to pull bibtex
 see e.g. http://labs.crossref.org/resolving-citations-we-dont-need-no-stinkin-parser/
 
