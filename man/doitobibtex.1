@@ -1,0 +1,59 @@
+.ig
+Copyright (C) 2015 Ati Sharma
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be included in
+translations approved by the Free Software Foundation instead of in
+the original English.
+..
+.
+.TH doitobibtex 1 "April 16, 2015" "version 0.1" "USER COMMANDS"
+.SH NAME
+doitobibtex \- Pulls bibtex data from a supplied doi URL via the crossref API.
+.SH SYNOPSIS
+.B doitobibtex
+[\fB-f\fR \fIKEYFORMAT\fR] \fIDOI\fR
+.SH DESCRIPTION
+This program pulls bibtex data from a supplied DOI (as a URL in http://dx.doi.org form, or pure DOI form as in the example) via the crossref API. The output is dumped to stdout. The bibtex entry is cleaned using bibclean and bibtool.
+.SH OPTIONS
+.TP
+\fB\-f\fR \fIKEYFORMAT\fR
+The format string passed to \fBbibtool\fR, to generate the bibtex key. Defaults to '%3n(author):%+4d($year)' (see man(1) bibtool).
+.SH EXAMPLE
+.TP
+To append the bibloagraphic data from a DOI lookup to the 'mybibliography.bib' file,
+.B doitobibtex
+0.1017/jfm.2013.286 >> mybibliography.bib
+.PP
+.TP
+or to dump the key to stdout, with a different key formatting,
+.B doitobibtex
+\-f '%1n(author)-%+4d(year)' http://dx.doi.org/0.1017/jfm.2013.286
+.PP
+.SH COMMENTS
+Requires \fBbibclean\fR and \fBbibtool\fR, which are distributed as part of the texlive distribution.
+.SH AUTHOR
+Ati Sharma
+a.sharma@soton.ac.uk
+.SH "REPORTING BUGS"
+Please email the author with any bugs.
+.SH COPYRIGHT
+Copyright (C) 2015 Ati Sharma
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+.SH "SEE ALSO"
+.BR searchtobibtex (1),
+.BR bibtool (1),
+.BR bibclean (1)
