@@ -1,4 +1,14 @@
 #!/bin/bash
+# v0.2
+
+# test for install dependencies
+test -z $( \
+    test $(which bibtool) && \
+    test $(which bibclean) && \
+    test $(which curl) && echo true\
+    ) && \
+    echo "$(basename $0) requires curl, bibtool and bibclean to be installed and in your path." >&2 && \
+    exit 1
 
 # bibtool key format string
 BIBKEYFMT='%n(author):%+4d(year)'

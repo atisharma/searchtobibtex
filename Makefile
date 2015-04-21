@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 MAKE     := /usr/bin/make
-PREFIX   := /tmp/usr/local
+PREFIX   := /usr/local
 MANDIR   := $(PREFIX)/share/man/man1
 BINDIR   := $(PREFIX)/bin
 BUILDDIR := build
