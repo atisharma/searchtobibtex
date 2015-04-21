@@ -17,38 +17,24 @@ translations approved by the Free Software Foundation instead of in
 the original English.
 ..
 .
-.TH pdf-rename-by-doi 1 "April 21, 2015" "version 0.1" "USER COMMANDS"
+.TH pdftobibtex 1 "April 21, 2015" "version 0.1" "USER COMMANDS"
 .SH NAME
-pdf-rename-by-doi \- Renames PDFs of journal papers, by performing a crossref search query to retrieve author, year, journal and title data.
+pdftobibtex \- Retrieves bibtex data for PDFs of journal papers, by performing a crossref search query via the DOI.
 .SH SYNOPSIS
-.B pdf-rename-by-doi
-[\fB-v\fR] [\fB-f\fR \fIKEYFORMAT\fR] \fIPDF_FILES\fR
+.B pdftobibtex
+[\fB-f\fR \fIKEYFORMAT\fR] \fIPDF_FILES\fR
 .SH DESCRIPTION
-This program searches the first two pages of the PDF for a DOI. It looks up that DOI using the crossref API, and renames the PDF according to the format string \fIKEYFORMAT\fR.
+This program searches the first two pages of the PDF for a DOI. It looks up that DOI using the crossref API, and dumps the retrieved bibtex entry to stdout. The bibtex key is formatted according to the format string \fIKEYFORMAT\fR.
 \" To understand the implementation, see for example http://labs.crossref.org/resolving-citations-we-dont-need-no-stinkin-parser/
 .SH OPTIONS
 .TP
-[\fB-v\fR]
-Verbose mode: write information about the move operation to stdout. Skipped files or directories are always written to stderr.
-.TP
 [\fB-f\fR \fIKEYFORMAT\fR]
-The format string passed to \fBbibtool\fR, to generate the bibtex key. Defaults to '%3n(author)-(journal)-(title)-%+4d($year)' (see man(1) bibtool).
-The (journal) and (title) options are parsed before being passed to bibtool.
+The format string passed to \fBbibtool\fR, to generate the bibtex key. Defaults to '%3n(author):%+4d($year)' (see man(1) bibtool).
 .SH EXAMPLES
 .TP
-To rename all PDF files in-place in the directory called papers,
-.B pdf-rename-by-doi
-papers/*.pdf
-.PP
-.TP
-To rename all PDF files in the directory called papers, sorting into a new subdirectory named by year,
-.B pdf-rename-by-doi
--f '%+4d(year)/%3n(author)-(journal)-(title)-%+4d(year)' papers/*.pdf
-.PP
-.TP
-To rename all PDF files in-place in subdirectories of the directory called papers
-.B pdf-rename-by-doi
-papers/*/*.pdf
+To find bibtex entries for all pdf files in the directory called papers, and append them to a file called mybib.bib,
+.B pdftobibtex
+papers/*.pdf >> mybib.bib
 .PP
 .SH COMMENTS
 Requires \fBpoppler-utils\fR, \fBbibclean\fR and \fBbibtool\fR.
@@ -65,7 +51,7 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 .SH "SEE ALSO"
 .BR searchtobibtex (1),
-.BR pdftobibtex (1),
+.BR pdf-rename-by-doi (1),
 .BR doitobibtex (1),
 .BR bibtool (1),
 .BR bibclean (1)
