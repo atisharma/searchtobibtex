@@ -1,0 +1,67 @@
+.ig
+Copyright (C) 2015 Ati Sharma
+
+Permission is granted to make and distribute verbatim copies of
+this manual provided the copyright notice and this permission notice
+are preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that this permission notice may be included in
+translations approved by the Free Software Foundation instead of in
+the original English.
+..
+.
+.TH pdf-rename-by-doi 1 "April 21, 2015" "version 0.1" "USER COMMANDS"
+.SH NAME
+pdf-rename-by-doi \- Renames PDFs of journal papers, by performing a crossref search query to retrieve author, year, journal and title data.
+.SH SYNOPSIS
+.B pdf-rename-by-doi
+[\fB-f\fR \fIKEYFORMAT\fR] \fIPDF_FILES\fR
+.SH DESCRIPTION
+This program searches the first two pages of the PDF for a DOI. It looks up that DOI using the crossref API, and renames the PDF according to the format string \fIKEYFORMAT\fR.
+\" To understand the implementation, see for example http://labs.crossref.org/resolving-citations-we-dont-need-no-stinkin-parser/
+.SH OPTIONS
+.TP
+[\fB-f\fR \fIKEYFORMAT\fR]
+The format string passed to \fBbibtool\fR, to generate the bibtex key. Defaults to '%3n(author)-(journal)-(title)-%+4d($year)' (see man(1) bibtool).
+The (journal) and (title) options are parsed before being passed to bibtool.
+.SH EXAMPLES
+.TP
+To rename all PDF files in-place in the directory called papers,
+.B pdf-rename-by-doi
+papers/*.pdf
+.PP
+.TP
+To rename all PDF files in the directory called papers, sorting into a new subdirectory named by year,
+.B pdf-rename-by-doi
+-f '%+4d(year)/%3n(author)-(journal)-(title)-%+4d(year)' papers/*.pdf
+.PP
+.TP
+To rename all PDF files in-place in subdirectories of the directory called papers
+.B pdf-rename-by-doi
+papers/*/*.pdf
+.PP
+.SH COMMENTS
+Requires \fBpoppler-utils\fR, \fBbibclean\fR and \fBbibtool\fR.
+.SH AUTHOR
+Ati Sharma
+a.sharma@soton.ac.uk
+.SH "REPORTING BUGS"
+Please email the author with any bugs.
+.SH COPYRIGHT
+Copyright (C) 2015 Ati Sharma
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+.SH "SEE ALSO"
+.BR searchtobibtex (1),
+.BR doitobibtex (1),
+.BR bibtool (1),
+.BR bibclean (1)
