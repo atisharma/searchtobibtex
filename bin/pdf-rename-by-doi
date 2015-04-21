@@ -39,16 +39,16 @@ BIBENTRYFILTER='= ,\|\"-\"\|url'
 # can use pdf metainfo sometimesm as in
 # DOI=$(pdfinfo -meta $FILE ... )
 # but this is found to be less commonly supplied, and requires poppler-utils.
-for FILE in $@; do
+for FILE in "$@"; do
 
     # skip directories
-    if [ -d $FILE ];
+    if [ -d "$FILE" ];
     then
         echo "Skipping directory $FILE" >&2
         continue
     fi
 
-    DOI=$(pdftotext -q -l 2 $FILE - | grep -m1 -A1 'DOI\|doi' \
+    DOI=$(pdftotext -q -l 2 "$FILE" - | grep -m1 -A1 'DOI\|doi' \
         | sed 's/[\[\]]/ /g' \
         | sed 's/dx\.doi\.org\// doi:/g' \
         | sed 's/doi>/ doi:/g' \
@@ -58,7 +58,7 @@ for FILE in $@; do
     # test here for DOI returned
     if [ -z $DOI ]
     then
-        echo "Skipping $FILE, no DOI found" >&2
+        #echo "Skipping $FILE, no DOI found" >&2
         continue
     fi
 
@@ -95,19 +95,23 @@ for FILE in $@; do
 
     NEWBASENAME=$(echo $KEY | sed "s/TITLE/$TITLE/" | sed "s/JOURNAL/$JOURNAL/")
 
-    NEWFILENAME=$(echo $FILE | sed "s#$(basename $FILE)#$NEWBASENAME#" ).pdf
+    BASE=$(basename "$FILE")
+    NEWFILENAME=$(echo $FILE | sed "s#$BASE#$NEWBASENAME#" | sed 's#\.pdf\.pdf#\.pdf#g' )
 
     # test here for filename existing
-    if [ -z $NEWFILENAME ]
+    if [ -z "$NEWFILENAME" ]
     then
         echo "Skipping $FILE, missing new filename" >&2
         continue
     fi
 
     # allow for possibility of using '/' in -f argument to create subdirectories by year or journal (for example)
-    mkdir -p $(dirname $NEWFILENAME)
+    mkdir -p $(dirname "$NEWFILENAME")
     
     # finally, do the move
-    mv $FILE $NEWFILENAME
+    #mv "$FILE" "$NEWFILENAME"
+    echo $FILE
+    echo $NEWFILENAME
+    echo
 
 done 
