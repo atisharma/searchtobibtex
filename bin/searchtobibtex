@@ -19,7 +19,7 @@
 BIBKEYFMT='%3n(author):%+4d(year)'
 
 # parse command line args
-while getopts y:r: opt; do
+while getopts y:r:f: opt; do
     case $opt in
         y)
             YEAR=$OPTARG
