@@ -21,9 +21,10 @@
 test -z $( \
     test $(which bibtool) && \
     test $(which bibclean) && \
+    test $(which pdftotext) && \
     test $(which curl) && echo true\
     ) && \
-    echo "$(basename $0) requires curl, bibtool and bibclean to be installed and in your path." >&2 && \
+    echo "$(basename $0) requires poppler-utils, curl, bibtool and bibclean to be installed and in your path." >&2 && \
     exit 1
 
 # default pdf name key format string
