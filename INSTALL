@@ -1,0 +1,15 @@
+To install, run as root:
+
+    make install
+
+This will install the scripts to /usr/local/bin and the man files to /usr/share/man. If you want to install somewhere else other than /usr/local (perhaps /opt) you will need to edit the Makefile to change PREFIX. There is no configure script for this project, as yet.
+
+To uninstall you can run (again as root):
+
+    make uninstall
+
+To just install the scripts or man files, bin and man targets are available.
+
+    make clean
+
+removes the build directory.
