@@ -9,6 +9,9 @@ pdf-rename-by-doi − Renames PDFs of journal papers, by performing a crossref s
 
 searchtobibtex − Performs a crossref search query to retrieve bibtex data.
 
+searchtobrowser − Performs a crossref search query to find digital object identifiers and opens up the resulting webpages.
+
+
 doitobibtex
 ===========
 
@@ -43,10 +46,6 @@ or to dump the key to stdout, with a different key formatting,
 
 **doitobibtex** −f ’%1n(author)-%+4d(year)’ http://dx.doi.org/0.1017/jfm.2013.286
 
-COMMENTS
---------
-
-Requires **bibclean** and **bibtool**.
 
 
 pdf-rename-by-doi
@@ -67,20 +66,10 @@ This program searches the first two pages of the PDF for a DOI. It looks up that
 OPTIONS
 -------
 
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><p>[<strong>-v</strong>]</p>
-<p>Verbose mode: write information about the move operation to stdout. Skipped files or directories are always written to stderr.</p></td>
-</tr>
-</tbody>
-</table>
+**-v**
+Verbose mode: write information about the move operation to stdout. Skipped files or directories are always written to stderr.
 
-[**-f** *KEYFORMAT*]
+**-f** *KEYFORMAT*
 
 The format string passed to **bibtool**, to generate the bibtex key. Defaults to ’%3n(author)-(journal)-(title)-%+4d(\$year)’ (see man(1) bibtool). The (journal) and (title) options are parsed before being passed to bibtool.
 
@@ -101,10 +90,6 @@ To rename all PDF files in-place in subdirectories of the directory
 
 **pdf-rename-by-doi** papers/\*/\*.pdf
 
-COMMENTS
---------
-
-Requires **poppler-utils**, **bibclean** and **bibtool**.
 
 
 pdftobibtex
@@ -125,7 +110,7 @@ This program searches the first two pages of the PDF for a DOI. It looks up that
 OPTIONS
 -------
 
-[**-f** *KEYFORMAT*]
+**-f** *KEYFORMAT*
 
 The format string passed to **bibtool**, to generate the bibtex key. Defaults to ’%3n(author):%+4d(\$year)’ (see man(1) bibtool).
 
@@ -137,10 +122,6 @@ To find bibtex entries for all pdf files in the directory called
 
 **pdftobibtex** papers/\*.pdf \>\> mybib.bib
 
-COMMENTS
---------
-
-Requires **poppler-utils**, **bibclean** and **bibtool**.
 
 
 searchtobibtex
@@ -161,24 +142,15 @@ This program performs a freeform crossref search query agains the string *SEARCH
 OPTIONS
 -------
 
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left"><p><strong>-r</strong> <em>NUM</em></p>
-<p>Return only NUM results (default 1)</p></td>
-</tr>
-</tbody>
-</table>
+**-r** *NUM*
+
+Return only NUM results (default 1)
 
 **-y** *YEAR*
 
 Restrict results to year=YEAR
 
-[**-f** *KEYFORMAT*]
+**-f** *KEYFORMAT*
 
 The format string passed to **bibtool**, to generate the bibtex key. Defaults to ’%3n(author):%+4d(\$year)’ (see man(1) bibtool).
 
@@ -195,15 +167,61 @@ To write to stdout the first five papers by someone called Einstein in
 
 **searchtobibtex** -r 5 -y 1905 "Einstein"
 
-COMMENTS
+
+
+SEARCHTOBROWSER
+===============
+
+NAME
+----
+
+searchtobrowser − Performs a crossref search query to find digital object identifiers and opens up the resulting webpages.
+
+SYNOPSIS
 --------
 
-Requires **bibclean** and **bibtool**.
+**searchtobrowser** [**-r** *NUM*] [**-y** *YEAR*] [**-b** *BROWSER*] *SEARCH\_STRING*
+
+DESCRIPTION
+-----------
+
+This program performs a freeform crossref search query agains the string *SEARCH\_STRING* and opens up the associated web pages in your browser.
+
+OPTIONS
+-------
+
+**-r** *NUM*
+
+Return only NUM results (default 1)
+
+**-y** *YEAR*
+
+Restrict results to year=YEAR
+
+**-b** *BROWSER*
+
+Specify the browser command to use. Defaults to x-www-browser.
+
+EXAMPLES
+--------
+
+To open up the page for the paper matching a search and restricting
+ results to 1953:
+
+**searchtobrowser** -y 1953 "A structure for deoxyribonucleaic acid Watson Crick"
+
+To open the first five papers by someone called Einstein in 1905, try
+
+**searchtobrowser** -r 5 -y 1905 "Einstein"
+
+To do the same but in chromium, try
+
+**searchtobrowser** -b chromium -r 5 -y 1905 "Einstein"
 
 AUTHOR
 ------
 
-Ati Sharma, a.sharma AT soton.ac.uk
+Ati Sharma a.sharma@soton.ac.uk
 
 REPORTING BUGS
 --------------
@@ -216,4 +234,8 @@ COPYRIGHT
 Copyright (C) 2015 Ati Sharma License GPLv3+: GNU GPL version 3 or later \<http://gnu.org/licenses/gpl.html\>.
  This is free software: you are free to change and redistribute it. There is NO WARRANTY, to the extent permitted by law.
 
-* * * * *
+SEE ALSO
+--------
+
+**pdf-rename-by-doi**(1), **pdftobibtex**(1), **doitobibtex**(1), **bibtool**(1), **bibclean**(1)
+
