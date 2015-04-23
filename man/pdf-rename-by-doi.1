@@ -28,10 +28,10 @@ This program searches the first two pages of the PDF for a DOI. It looks up that
 \" To understand the implementation, see for example http://labs.crossref.org/resolving-citations-we-dont-need-no-stinkin-parser/
 .SH OPTIONS
 .TP
-[\fB-v\fR]
+\fB-v\fR
 Verbose mode: write information about the move operation to stdout. Skipped files or directories are always written to stderr.
 .TP
-[\fB-f\fR \fIKEYFORMAT\fR]
+\fB-f\fR \fIKEYFORMAT\fR
 The format string passed to \fBbibtool\fR, to generate the bibtex key. Defaults to '%3n(author)-(journal)-(title)-%+4d($year)' (see man(1) bibtool).
 The (journal) and (title) options are parsed before being passed to bibtool.
 .SH EXAMPLES
@@ -65,6 +65,7 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 .SH "SEE ALSO"
 .BR searchtobibtex (1),
+.BR searchtobrowser (1),
 .BR pdftobibtex (1),
 .BR doitobibtex (1),
 .BR bibtool (1),
