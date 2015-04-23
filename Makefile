@@ -6,7 +6,7 @@ MANDIR   := $(PREFIX)/share/man/man1
 BINDIR   := $(PREFIX)/bin
 BUILDDIR := build
 
-BINFILES := doitobibtex pdftobibtex pdf-rename-by-doi searchtobibtex
+BINFILES := doitobibtex pdftobibtex pdf-rename-by-doi searchtobibtex searchtobrowser
 MANFILES := $(patsubst %,man/%.1,$(BINFILES))
 
 install: bin man
