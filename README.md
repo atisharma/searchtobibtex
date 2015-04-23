@@ -1,4 +1,4 @@
-DOITOBIBTEX, PDF-RENAME-BY-DOI, PDFTOBIBTEX, SEARCHTOBIBTEX
+searchtobibtex: tools to manage bibtex and pdfs via crossref searches
 =====================================================
 
 doitobibtex − Pulls bibtex data from a supplied doi URL via the crossref API.
