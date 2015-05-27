@@ -63,7 +63,9 @@ for FILE in "$@"; do
         continue
     fi
 
-    DOI=$(pdftotext -q -l 2 "$FILE" - | grep -m1 -A1 'DOI\|doi' \
+    DOI=$(pdftotext -q -l 2 "$FILE" - \
+        | sed 's/Digital Object Identifier/doi:/g' \
+        | grep -m1 -A1 'DOI\|doi' \
         | sed 's/[\[\]]/ /g' \
         | sed 's/dx\.doi\.org\// doi:/g' \
         | sed 's/doi>/ doi:/g' \
