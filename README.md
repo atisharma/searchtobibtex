@@ -1,8 +1,6 @@
 searchtobibtex: tools to manage bibtex and pdfs via crossref searches
 =====================================================
 
-doitobibtex − Pulls bibtex data from a supplied doi URL via the crossref API.
-
 pdftobibtex − Retrieves bibtex data for PDFs of journal papers, by performing a crossref search query via the DOI.
 
 pdf-rename-by-doi − Renames PDFs of journal papers, by performing a crossref search query to retrieve author, year, journal and title data.
@@ -10,42 +8,6 @@ pdf-rename-by-doi − Renames PDFs of journal papers, by performing a crossref s
 searchtobibtex − Performs a crossref search query to retrieve bibtex data.
 
 searchtobrowser − Performs a crossref search query to find digital object identifiers and opens up the resulting webpages.
-
-
-doitobibtex
-===========
-
-doitobibtex − Pulls bibtex data from a supplied doi URL via the crossref API.
-
-SYNOPSIS
---------
-
-**doitobibtex** [**-f** *KEYFORMAT*] *DOI*
-
-DESCRIPTION
------------
-
-This program pulls bibtex data from a supplied DOI (as a URL in http://dx.doi.org form, or pure DOI form as in the example) via the crossref API. The output is dumped to stdout. The bibtex entry is cleaned using bibclean and bibtool.
-
-OPTIONS
--------
-
-**−f** *KEYFORMAT*
-
-The format string passed to **bibtool**, to generate the bibtex key. Defaults to ’%3n(author):%+4d(\$year)’ (see man(1) bibtool).
-
-EXAMPLE
--------
-
-To append the bibloagraphic data from a DOI lookup to the
- ’mybibliography.bib’ file,
-
-**doitobibtex** 0.1017/jfm.2013.286 \>\> mybibliography.bib
-
-or to dump the key to stdout, with a different key formatting,
-
-**doitobibtex** −f ’%1n(author)-%+4d(year)’ http://dx.doi.org/0.1017/jfm.2013.286
-
 
 
 pdf-rename-by-doi
