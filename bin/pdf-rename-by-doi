@@ -70,7 +70,7 @@ for FILE in "$@"; do
         | sed 's/dx\.doi\.org\// doi:/g' \
         | sed 's/doi>/ doi:/g' \
         | sed 's/</ /g' \
-        | sed -n -e 's_.*[Dd][Oo][Ii][:)] *\([[:digit:]][[:digit:]]*.[[:alnum:])(.-]*/[[:alnum:])(.-][[:alnum:]):(.-]*[[:alnum:]-]\).*_\1_p' )
+        | sed -n -e 's_.*[Dd][Oo][Ii][:) ] *\([[:digit:]][[:digit:]]*.[[:alnum:])(.-]*/[[:alnum:])(.-][[:alnum:]):(.-]*[[:alnum:]-]\).*_\1_p' )
 
     # test here for DOI returned
     if [ -z $DOI ]
