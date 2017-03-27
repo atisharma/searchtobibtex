@@ -21,10 +21,11 @@ the original English.
 .SH NAME
 pdf-rename-by-doi \- Renames PDFs of journal papers, by performing a crossref search query to retrieve author, year, journal and title data.
 .SH SYNOPSIS
-.B pdf-rename-by-doi
-[\fB-v\fR] [\fB-f\fR \fIKEYFORMAT\fR] \fIPDF_FILES\fR
+.B pdf-rename-by-doi [\fB-v\fR] [\fB-f\fR \fIKEYFORMAT\fR] \fIPDF_FILES\fR
+
+.B pdf-rename-by-doi [\fB-v\fR] [\fB-f\fR \fIKEYFORMAT\fR] \fB-d\fR \fIDOI\fR \fIPDF_FILE\fR
 .SH DESCRIPTION
-This program searches the first two pages of the PDF for a DOI. It looks up that DOI using the crossref API, and renames the PDF according to the format string \fIKEYFORMAT\fR.
+This program searches the first two pages of each PDF file for a DOI. It looks up each DOI using the crossref API, and renames each PDF according to the format string \fIKEYFORMAT\fR.
 \" To understand the implementation, see for example http://labs.crossref.org/resolving-citations-we-dont-need-no-stinkin-parser/
 .SH OPTIONS
 .TP
@@ -34,6 +35,9 @@ Verbose mode: write information about the move operation to stdout. Skipped file
 \fB-f\fR \fIKEYFORMAT\fR
 The format string passed to \fBbibtool\fR, to generate the bibtex key. Defaults to '%3n(author)-(journal)-(title)-%+4d($year)' (see man(1) bibtool).
 The (journal) and (title) options are parsed before being passed to bibtool.
+.TP
+\fB-d\fR \fIDOI\fR
+Instead of scraping the PDF file for a DOI, specify the DOI as an argument. In this case, you can only rename one file at a time.
 .SH EXAMPLES
 .TP
 To rename all PDF files in-place in the directory called papers,
@@ -56,9 +60,10 @@ Requires \fBpoppler-utils\fR, \fBbibclean\fR and \fBbibtool\fR.
 Ati Sharma
 a.sharma@soton.ac.uk
 .SH "REPORTING BUGS"
-Please email the author with any bugs.
+There are bugs. Please email the author with any ones you want fixed.
 .SH COPYRIGHT
 Copyright (C) 2015 Ati Sharma
+
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 .br
 This is free software: you are free to change and redistribute it.

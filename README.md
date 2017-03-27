@@ -20,6 +20,8 @@ SYNOPSIS
 
 **pdf-rename-by-doi** [**-v**] [**-f** *KEYFORMAT*] *PDF\_FILES*
 
+**pdf-rename-by-doi** [**-v**] [**-f** *KEYFORMAT*] [**-d**] *DOI*  *PDF\_FILE*
+
 DESCRIPTION
 -----------
 
@@ -34,6 +36,9 @@ Verbose mode: write information about the move operation to stdout. Skipped file
 **-f** *KEYFORMAT*
 
 The format string passed to **bibtool**, to generate the bibtex key. Defaults to ’%3n(author)-(journal)-(title)-%+4d(\$year)’ (see man(1) bibtool). The (journal) and (title) options are parsed before being passed to bibtool.
+
+**-d** *DOI*
+Instead of scraping the PDF file for a DOI, specify the DOI as an argument. In this case, you can only rename one file at a time.
 
 EXAMPLES
 --------
