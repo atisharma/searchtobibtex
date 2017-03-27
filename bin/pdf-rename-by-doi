@@ -32,8 +32,11 @@ test -z $( \
 # uses - instead of : as default since : is reserved on Mac OS
 BIBKEYFMT='%3n(author)-Journal-Title-%+4d(year)'
 
-while getopts v:f: opt; do
+while getopts vf:d: opt; do
     case $opt in
+        d)
+            DOI_ARG="$OPTARG"
+            ;;
         v)
             VERBOSE=TRUE
             ;;
@@ -63,14 +66,19 @@ for FILE in "$@"; do
         continue
     fi
 
-    DOI=$(pdftotext -q -l 2 "$FILE" - \
-        | sed 's/Digital Object Identifier[:]*/doi:/g' \
-        | grep -m1 -A1 'DOI\|doi' \
-        | sed 's/[\[\]]/ /g' \
-        | sed 's/dx\.doi\.org\// doi:/g' \
-        | sed 's/doi>/ doi:/g' \
-        | sed 's/</ /g' \
-        | sed -n -e 's_.*[Dd][Oo][Ii][:) ] *\([[:digit:]][[:digit:]]*.[[:alnum:])(.-]*/[[:alnum:])(.-][[:alnum:]):(.-]*[[:alnum:]-]\).*_\1_p' )
+    if [ -z $DOI_ARG ]
+    then 
+        DOI=$(pdftotext -q -l 2 "$FILE" - \
+            | sed 's/Digital Object Identifier[:]*/doi:/g' \
+            | grep -m1 -A1 'DOI\|doi' \
+            | sed 's/[\[\]]/ /g' \
+            | sed 's/dx\.doi\.org\// doi:/g' \
+            | sed 's/doi>/ doi:/g' \
+            | sed 's/</ /g' \
+            | sed -n -e 's_.*[Dd][Oo][Ii][:) ] *\([[:digit:]][[:digit:]]*.[[:alnum:])(.-]*/[[:alnum:])(.-][[:alnum:]):(.-]*[[:alnum:]-]\).*_\1_p' )
+    else
+        DOI="$DOI_ARG"
+    fi
 
     # test here for DOI returned
     if [ -z $DOI ]
