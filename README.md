@@ -1,3 +1,7 @@
+# RETIRED: SEE [bibsearch](https://github.com/atisharma/bibsearch)
+
+
+
 searchtobibtex: tools to manage bibtex and pdfs via crossref searches
 =====================================================
 
